@@ -1,0 +1,12 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        xmlns:appContracts="clr-namespace:ChatR.WpfClient.Contracts"
+        xmlns:local="clr-namespace:ChatR.WpfClient" x:Class="ChatR.WpfClient.Shell"
+        Title="ChatR" Height="350" Width="525">
+    <Window.DataContext>
+        <local:ShellViewModel/>
+    </Window.DataContext>
+    <ContentControl prism:RegionManager.RegionName="{x:Static appContracts:RegionNames.MainRegion}" />
+</Window>

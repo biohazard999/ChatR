@@ -10,7 +10,7 @@ using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
 
 namespace ChatR.WpfClient.ViewModels
 {
-    public class LoginViewModel : BindableBase
+    public class LoginViewModel : BindableBase, INavigationAware
     {
         private readonly IChatHubProxy _proxy;
         private readonly IRegionManager _rm;
@@ -80,7 +80,7 @@ namespace ChatR.WpfClient.ViewModels
 
             }, () => IsConnected && !IsLoggingIn && !String.IsNullOrWhiteSpace(Username));
             
-            proxy.Connected = (detail, details) => rm.RequestNavigate(RegionNames.MainRegion, "ChatView");
+            proxy.Connected = (detail, details) => rm.RequestNavigate(RegionNames.MainRegion, new Uri("ChatView", UriKind.Relative));
         }
 
         private async Task Connect()
@@ -91,6 +91,21 @@ namespace ChatR.WpfClient.ViewModels
             }
             else
                 IsConnected = _proxy.IsConnected;
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
         }
     }
 }

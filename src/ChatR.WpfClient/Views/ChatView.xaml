@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:ViewModels="clr-namespace:ChatR.WpfClient.ViewModels"
              mc:Ignorable="d"
-             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ChatViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <ViewModels:ChatViewModel/>
+    </UserControl.DataContext>
     <StackPanel>
-        <TextBlock Text="Chat is comming"></TextBlock>
+        <TextBlock Text="Chat is comming" Foreground="Red" FontSize="72"></TextBlock>
+        <Button Content="To Login" Command="{Binding NavigateTo, Mode=OneWay}"/>
     </StackPanel>
 </UserControl>

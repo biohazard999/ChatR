@@ -93,6 +93,7 @@
     <Compile Include="Modules\ChatModule.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
+    <Compile Include="ShellViewModel.cs" />
     <Compile Include="ViewModels\BindableBase.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -18,6 +19,7 @@ namespace ChatR.WpfClient.Views
     /// <summary>
     /// Interaction logic for ChatView.xaml
     /// </summary>
+    [Export("ChatView")]
     public partial class ChatView : UserControl
     {
         public ChatView(ChatViewModel viewModel)

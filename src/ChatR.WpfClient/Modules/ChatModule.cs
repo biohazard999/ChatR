@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using ChatR.WpfClient.Contracts;
 using ChatR.WpfClient.Views;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
@@ -22,7 +23,7 @@ namespace ChatR.WpfClient.Modules
 
         public void Initialize()
         {
-            _manager.RegisterViewWithRegion(RegionNames.MainRegion, () => _serviceLocator.GetInstance<LoginView>());
+            _manager.RequestNavigate(RegionNames.MainRegion, new Uri("LoginView", UriKind.Relative));
         }
     }
 }

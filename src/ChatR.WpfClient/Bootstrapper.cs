@@ -23,7 +23,8 @@ namespace ChatR.WpfClient
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            App.Current.MainWindow = (Window)Shell;
+            App.Current.MainWindow = (Shell as Window);
+            App.Current.MainWindow.Show();
         }
         protected override CompositionContainer CreateContainer()
         {
@@ -73,15 +74,17 @@ namespace ChatR.WpfClient
             Container.ComposeExportedValue(SynchronizationContext.Current);
         }
 
-        public override void Run(bool runWithDefaultConfiguration)
-        {
-            //SplashScreenHelper.Instance.ShowSplashScreen();
-            base.Run(runWithDefaultConfiguration);
-            //SplashScreenHelper.Instance.HideSplashScreen();
+        //public override void Run(bool runWithDefaultConfiguration)
+        //{
+        //    //SplashScreenHelper.Instance.ShowSplashScreen();
+        //    base.Run(runWithDefaultConfiguration);
+        //    //SplashScreenHelper.Instance.HideSplashScreen();
 
-            //App.Current.MainWindow.Show();
-            //App.Current.MainWindow.Activate();
-        }
+
+        //    //App.Current.MainWindow.Show();
+        //    App.Current.MainWindow.Show();
+        //    App.Current.MainWindow.Activate();
+        //}
 
     }
 }

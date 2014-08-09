@@ -1,0 +1,1 @@
+tools\fake\tools\fake.exe build.fsx %*

@@ -8,7 +8,9 @@ namespace ChatR.SignalRClient
     {
         Task<bool> Connect();
         bool IsConnected { get; }
-        Action<ChatMessage> MessageReceived { get; set; }
+        Action<UserDetail, ChatMessage> MessageReceived { get; set; }
+        Action<UserDetail, UserDetail[]> Connected { get; set; }
         Task<ChatMessage> SendMessage(ChatMessage message);
+        Task<string> Login(string userName);
     }
 }

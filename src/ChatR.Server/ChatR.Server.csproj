@@ -76,6 +76,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Hubs\IChatHubClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalRService.cs" />
@@ -85,8 +87,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Hubs\" />
+    <ProjectReference Include="..\ChatR.Model\ChatR.Model.csproj">
+      <Project>{B5E4AF4C-0CF4-4B61-BFBD-1BCA1234D698}</Project>
+      <Name>ChatR.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

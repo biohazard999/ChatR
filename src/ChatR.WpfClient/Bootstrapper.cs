@@ -1,6 +1,16 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Registration;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Windows;
+using ChatR.SignalRClient;
+using ChatR.WpfClient.Contracts;
+using ChatR.WpfClient.Views;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.MefExtensions;
+using Microsoft.Practices.Prism.Regions;
 
 namespace ChatR.WpfClient
 {
@@ -23,8 +33,46 @@ namespace ChatR.WpfClient
         protected override void ConfigureAggregateCatalog()
         {
             base.ConfigureAggregateCatalog();
-            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly));
+
+            var registration = new RegistrationBuilder();
+            
+            registration.ForTypesMatching(t => t.Name.EndsWith("ViewModel"))
+                .SelectConstructor(c => c.OrderBy(m => m.GetParameters().Count()).FirstOrDefault())
+                .Export();
+
+            registration.ForTypesMatching(t => t.Name.EndsWith("View"))
+                .SelectConstructor(c => c.OrderBy(m => m.GetParameters().Count()).FirstOrDefault())
+                .Export();
+
+            registration.ForTypesMatching(t => t.Name.EndsWith("Repository"))
+                .SelectConstructor(c => c.OrderBy(m => m.GetParameters().Count()).FirstOrDefault())
+                .ExportInterfaces(i => i.IsPublic);
+
+            registration.ForTypesMatching(t => t.Name.EndsWith("Module"))
+                .SelectConstructor(c => c.OrderBy(m => m.GetParameters().Count()).FirstOrDefault())
+                .ExportInterfaces(i => i.IsPublic);
+
+
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly, registration));
+
+
+            registration = new RegistrationBuilder();
+
+            registration.ForTypesMatching(t => true)
+                        .ExportInterfaces(i => i.IsPublic);
+
+
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ChatHubProxy).Assembly, registration));
         }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            Container.ComposeExportedValue(new HubConnection("http://localhost:5000"));
+            Container.ComposeExportedValue(SynchronizationContext.Current);
+        }
+
         public override void Run(bool runWithDefaultConfiguration)
         {
             //SplashScreenHelper.Instance.ShowSplashScreen();

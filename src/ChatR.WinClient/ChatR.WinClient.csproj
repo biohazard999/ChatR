@@ -76,7 +76,7 @@
     <Compile Include="Services\INavigationAware.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Utils\Class1.cs" />
+    <Compile Include="Utils\MefServiceLocatorAdapter.cs" />
     <Compile Include="Views\ChatView.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,8 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Registration;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChatR.SignalRClient;
+using ChatR.WinClient.Presenters;
+using ChatR.WinClient.Services;
+using ChatR.WinClient.Utils;
+using Microsoft.AspNet.SignalR.Client;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ChatR.WinClient
 {
@@ -15,8 +25,45 @@ namespace ChatR.WinClient
         static void Main()
         {
             Application.EnableVisualStyles();
+
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var container = ConfigureContainer();
+
+            var mainFormPresenter = container.GetExportedValue<ShellPresenter>();
+
+            var navigationService = container.GetExportedValue<INavigationService>();
+
+            navigationService.NavigateTo("Login");
+
+            mainFormPresenter.Run();
+        }
+
+        private static CompositionContainer ConfigureContainer()
+        {
+            var catalog = new AggregateCatalog();
+
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof (Program).Assembly));
+            
+
+            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
+
+
+            if(WindowsFormsSynchronizationContext.Current == null)
+                WindowsFormsSynchronizationContext.SetSynchronizationContext(new WindowsFormsSynchronizationContext());
+
+            var hubProxy = new ChatHubProxy(new HubConnection("http://localhost:5000"), WindowsFormsSynchronizationContext.Current);
+
+            container.ComposeExportedValue<IChatHubProxy>(hubProxy);
+
+
+            var adapter = new MefServiceLocatorAdapter(container);
+
+            container.ComposeExportedValue<IServiceLocator>(adapter);
+
+            ServiceLocator.SetLocatorProvider(() => adapter);
+
+            return container;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace ChatR.WinClient
+﻿namespace ChatR.WinClient.Views
 {
-    partial class Form1
+    partial class Shell
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "Shell";
         }
 
         #endregion
     }
 }
-

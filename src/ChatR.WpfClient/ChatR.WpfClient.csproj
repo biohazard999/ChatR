@@ -93,6 +93,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChatR.SignalRClient\ChatR.SignalRClient.csproj">
+      <Project>{87ca1169-e0b1-4d6e-9b9d-bb09ea69f4a9}</Project>
+      <Name>ChatR.SignalRClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

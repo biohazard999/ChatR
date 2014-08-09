@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ChatR.SignalRClient
+namespace ChatR.Model
 {
-    public class Class1
+    public class ChatMessage
     {
+        public string Message { get; set; }
     }
 }

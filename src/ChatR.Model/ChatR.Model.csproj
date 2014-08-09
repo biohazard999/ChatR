@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87CA1169-E0B1-4D6E-9B9D-BB09EA69F4A9}</ProjectGuid>
+    <ProjectGuid>{B5E4AF4C-0CF4-4B61-BFBD-1BCA1234D698}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChatR.SignalRClient</RootNamespace>
-    <AssemblyName>ChatR.SignalRClient</AssemblyName>
+    <RootNamespace>ChatR.Model</RootNamespace>
+    <AssemblyName>ChatR.Model</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,24 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatHubProxy.cs" />
-    <Compile Include="IChatHubProxy.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Client">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Client.2.1.1\lib\portable-net45+sl5+netcore45+wp8+wp81+wpa81\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ChatR.Model\ChatR.Model.csproj">
-      <Project>{B5E4AF4C-0CF4-4B61-BFBD-1BCA1234D698}</Project>
-      <Name>ChatR.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

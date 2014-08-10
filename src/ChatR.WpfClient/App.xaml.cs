@@ -1,26 +1,28 @@
-﻿using System;
-using System.ComponentModel.Composition.Primitives;
-using System.Diagnostics;
+﻿#if DEBUG
 using System.Windows;
+#else
+using System;
+using System.Diagnostics;
+using System.Windows.Threading;
+#endif
 
 namespace ChatR.WpfClient
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-#if (DEBUG)
-            RunInDebugMode();
-#else
-            RunInReleaseMode();
-#endif
+
+            DoRun();
+            
+
             if (!Dispatcher.HasShutdownStarted)
-                this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -30,13 +32,14 @@ namespace ChatR.WpfClient
             //TriggerService.CloseTriggers();
         }
 
-        private static void RunInDebugMode()
+#if (DEBUG)
+        private static void DoRun()
         {
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
         }
-
-        private static void RunInReleaseMode()
+#else
+        private static void DoRun()
         {
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
             Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
@@ -51,7 +54,8 @@ namespace ChatR.WpfClient
             }
         }
 
-        static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+
+        static void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             HandleException(e.Exception);
         }
@@ -69,5 +73,6 @@ namespace ChatR.WpfClient
             //ExceptionReporter.Show(ex);
             Environment.Exit(1);
         }
+#endif
     }
 }

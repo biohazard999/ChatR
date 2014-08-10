@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Drawing;
-using System.Data;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using ChatR.WinClient.Annotations;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 
 namespace ChatR.WinClient.Views
 {
     [Export(typeof(ILoginView))]
-    public partial class LoginView : DevExpress.XtraEditors.XtraUserControl, ILoginView, INotifyPropertyChanged
+    public partial class LoginView : XtraUserControl, ILoginView, INotifyPropertyChanged
     {
         public LoginView()
         {
@@ -49,7 +42,7 @@ namespace ChatR.WinClient.Views
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void userNameTextEdit_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
+        private void userNameTextEdit_EditValueChanging(object sender, ChangingEventArgs e)
         {
             OnPropertyChanged("UserName");
         }

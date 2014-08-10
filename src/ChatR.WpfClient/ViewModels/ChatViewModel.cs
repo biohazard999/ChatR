@@ -19,16 +19,10 @@ namespace ChatR.WpfClient.ViewModels
         public ChatViewModel(IRegionManager rm)
         {
             _rm = rm;
-            NavigateTo = new DelegateCommand(() => _rm.RequestNavigate(RegionNames.MainRegion, new Uri("LoginView", UriKind.Relative),
-                (NavigationResult nr) =>
-    {
-        var error = nr.Error;
-        var result = nr.Result;
-        // put a breakpoint here and checkout what NavigationResult contains
-    }));
+            NavigateTo = new DelegateCommand(() => _rm.RequestNavigate(RegionNames.MainRegion, new Uri("LoginView", UriKind.Relative)));
         }
 
-        public DelegateCommand NavigateTo { get; set; }
+        public DelegateCommand NavigateTo { get; private set; }
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             

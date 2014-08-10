@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Forms;
 using ChatR.WinClient.Contracts;
 using ChatR.WinClient.Services;
 using ChatR.WinClient.Views;
-using DevExpress.Internal;
 
 namespace ChatR.WinClient.Presenters
 {

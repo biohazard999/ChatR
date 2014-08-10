@@ -11,7 +11,7 @@ namespace ChatR.Server.Hubs
         {
             var user = _connectedUsers.First(m => m.ConnectionId == Context.ConnectionId);
 
-            this.Clients.Others.OnMessageReceived(user, message);
+            Clients.Others.OnMessageReceived(user, message);
         }
 
         public void Login(string userName)

@@ -1,4 +1,5 @@
 using Microsoft.AspNet.SignalR;
+using Microsoft.Owin.Cors;
 using Owin;
 
 namespace ChatR.Server
@@ -12,9 +13,9 @@ namespace ChatR.Server
 
         private void UseSignalR(IAppBuilder application)
         {
-            application.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            application.UseCors(CorsOptions.AllowAll);
 
-            application.MapSignalR(new HubConfiguration()
+            application.MapSignalR(new HubConfiguration
             {
                 EnableDetailedErrors = true,
                 EnableJSONP = false,

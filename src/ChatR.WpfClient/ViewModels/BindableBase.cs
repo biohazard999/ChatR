@@ -34,10 +34,10 @@ namespace ChatR.WpfClient.ViewModels
         [NotifyPropertyChangedInvocator]
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals((object)storage, (object)value))
+            if (Equals(storage, value))
                 return false;
             storage = value;
-            this.OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName);
             return true;
         }
 
@@ -50,10 +50,10 @@ namespace ChatR.WpfClient.ViewModels
         ///             that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler changedEventHandler = this.PropertyChanged;
+            var changedEventHandler = PropertyChanged;
             if (changedEventHandler == null)
                 return;
-            changedEventHandler((object)this, new PropertyChangedEventArgs(propertyName));
+            changedEventHandler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace ChatR.WpfClient.ViewModels
         /// <typeparam name="T">The type of the property that has a new value</typeparam><param name="propertyExpression">A Lambda expression representing the property that has a new value.</param>
         protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            this.OnPropertyChanged(PropertySupport.ExtractPropertyName<T>(propertyExpression));
+            OnPropertyChanged(PropertySupport.ExtractPropertyName(propertyExpression));
         }
     }
 }

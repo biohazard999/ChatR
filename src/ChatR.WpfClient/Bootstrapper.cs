@@ -2,15 +2,11 @@
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Registration;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows;
 using ChatR.SignalRClient;
-using ChatR.WpfClient.Contracts;
-using ChatR.WpfClient.Views;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Practices.Prism.MefExtensions;
-using Microsoft.Practices.Prism.Regions;
 
 namespace ChatR.WpfClient
 {
@@ -23,8 +19,8 @@ namespace ChatR.WpfClient
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            App.Current.MainWindow = (Shell as Window);
-            App.Current.MainWindow.Show();
+            Application.Current.MainWindow = (Window)Shell;
+            Application.Current.MainWindow.Show();
         }
         protected override CompositionContainer CreateContainer()
         {

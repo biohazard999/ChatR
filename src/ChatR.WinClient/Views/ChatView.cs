@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
 namespace ChatR.WinClient.Views
 {
     [Export(typeof(IChatView))]
-    public partial class ChatView : DevExpress.XtraEditors.XtraUserControl, IChatView
+    public partial class ChatView : XtraUserControl, IChatView
     {
         public ChatView()
         {

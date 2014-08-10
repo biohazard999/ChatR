@@ -20,7 +20,7 @@ namespace ChatR.WinClient.Utils
         {
             var list = new List<object>();
 
-            var enumerable = compositionContainer.GetExports(serviceType, null, (string)null);
+            var enumerable = compositionContainer.GetExports(serviceType, null, null);
 
             list.AddRange(from export in enumerable select export.Value);
 
@@ -29,12 +29,12 @@ namespace ChatR.WinClient.Utils
 
         protected override object DoGetInstance(Type serviceType, string key)
         {
-            var source = this.compositionContainer.GetExports(serviceType, null, key);
+            var source = compositionContainer.GetExports(serviceType, null, key);
             if ((source == null) || (!source.Any()))
             {
-                throw new ActivationException(this.FormatActivationExceptionMessage((Exception)new CompositionException("Export not found"), (Type)serviceType, key));
+                throw new ActivationException(FormatActivationExceptionMessage(new CompositionException("Export not found"), serviceType, key));
             }
-            return source.Single<Lazy<object, object>>().Value;
+            return source.Single().Value;
         }
     }
 }

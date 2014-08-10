@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using ChatR.SignalRClient;
 using ChatR.WpfClient.Contracts;
 
@@ -13,7 +12,6 @@ namespace ChatR.WpfClient.ViewModels
     public class LoginViewModel : BindableBase, INavigationAware
     {
         private readonly IChatHubProxy _proxy;
-        private readonly IRegionManager _rm;
         private string _username;
         private bool _isConnected;
         private bool _isLoggingIn;
@@ -28,7 +26,7 @@ namespace ChatR.WpfClient.ViewModels
             }
         }
 
-        public bool IsConnected
+        private bool IsConnected
         {
             get { return _isConnected; }
             set
@@ -38,7 +36,7 @@ namespace ChatR.WpfClient.ViewModels
             }
         }
 
-        public bool IsLoggingIn
+        private bool IsLoggingIn
         {
             get { return _isLoggingIn; }
             set
@@ -60,7 +58,6 @@ namespace ChatR.WpfClient.ViewModels
         public LoginViewModel(IChatHubProxy proxy, IRegionManager rm)
         {
             _proxy = proxy;
-            _rm = rm;
 
             Action action = async () => await Connect();
 

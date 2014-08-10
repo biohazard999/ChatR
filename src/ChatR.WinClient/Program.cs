@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Registration;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChatR.SignalRClient;
 using ChatR.WinClient.Presenters;
@@ -49,10 +45,10 @@ namespace ChatR.WinClient
             var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
 
 
-            if(WindowsFormsSynchronizationContext.Current == null)
-                WindowsFormsSynchronizationContext.SetSynchronizationContext(new WindowsFormsSynchronizationContext());
+            if(SynchronizationContext.Current == null)
+                SynchronizationContext.SetSynchronizationContext(new WindowsFormsSynchronizationContext());
 
-            var hubProxy = new ChatHubProxy(new HubConnection("http://localhost:5000"), WindowsFormsSynchronizationContext.Current);
+            var hubProxy = new ChatHubProxy(new HubConnection("http://localhost:5000"), SynchronizationContext.Current);
 
             container.ComposeExportedValue<IChatHubProxy>(hubProxy);
 

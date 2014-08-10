@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ChatR.Model;
+﻿using ChatR.Model;
 
 namespace ChatR.Server.Hubs
 {

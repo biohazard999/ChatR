@@ -8,10 +8,10 @@ let outdirWinClient = outdir + "/ChatR.WinClient"
 let outdirWpfClient = outdir + "/ChatR.WpfClient"
 let outdirWebClient = outdir + "/ChatR.WebClient"
 
-let serverProj =    !! "src/ChatR.Server/ChatR.Server*.csproj"
-let winClientProj = !! "src/ChatR.WinClient/ChatR.WinClient*.csproj"
-let wpfClientProj = !! "src/ChatR.WpfClient/ChatR.WpfClient*.csproj"
-let webClientProj = !! "src/ChatR.WebClient/ChatR.WebClient*.csproj"
+let serverProj =    !! "src/ChatR.Server*/ChatR.Server*.csproj"
+let winClientProj = !! "src/ChatR.WinClient*/ChatR.WinClient*.csproj"
+let wpfClientProj = !! "src/ChatR.WpfClient*/ChatR.WpfClient*.csproj"
+let webClientProj = !! "src/ChatR.WebClient*/ChatR.WebClient*.csproj"
 
 Target "Clear" (fun _ -> 
     CleanDir outdir

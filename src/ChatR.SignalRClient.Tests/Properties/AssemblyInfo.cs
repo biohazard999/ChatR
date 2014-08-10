@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChatR.WebClient")]
+[assembly: AssemblyTitle("ChatR.SignalRClient.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ChatR.WebClient")]
+[assembly: AssemblyProduct("ChatR.SignalRClient.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f2ea24d1-5463-4d38-9ac2-df4b2b75281b")]
+[assembly: Guid("d823120f-91bf-4494-87b7-033bdf58e0b6")]
 
 // Version information for an assembly consists of the following four values:
 //

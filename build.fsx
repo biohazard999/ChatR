@@ -6,12 +6,12 @@ let outdir = "bin"
 let outdirServer = outdir + "/ChatR.Server"
 let outdirWinClient = outdir + "/ChatR.WinClient"
 let outdirWpfClient = outdir + "/ChatR.WpfClient"
-let outdirWebClient = outdir
+let outdirWebClient = outdir + "/ChatR.WebClient"
 
-let serverProj = !! "src/ChatR.Server/ChatR.Server.csproj"
-let winClientProj = !! "src/ChatR.WinClient/ChatR.WinClient.csproj"
-let wpfClientProj = !! "src/ChatR.WpfClient/ChatR.WpfClient.csproj"
-let webClientProj = "src/ChatR.WebClient/ChatR.WebClient.csproj"
+let serverProj =    !! "src/ChatR.Server/ChatR.Server*.csproj"
+let winClientProj = !! "src/ChatR.WinClient/ChatR.WinClient*.csproj"
+let wpfClientProj = !! "src/ChatR.WpfClient/ChatR.WpfClient*.csproj"
+let webClientProj = !! "src/ChatR.WebClient/ChatR.WebClient*.csproj"
 
 Target "Clear" (fun _ -> 
     CleanDir outdir
@@ -28,7 +28,8 @@ Target "Build" (fun _ ->
     MSBuildRelease outdirWpfClient "Build" wpfClientProj
         |> Log "ChatR.WpfClient-Output: "
 
-    BuildWebsite outdirWebClient webClientProj
+    MSBuildRelease outdirWebClient "Build" webClientProj
+        |> Log "ChatR.WebClient-Output: "
 )
 
 

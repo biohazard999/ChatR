@@ -1,8 +1,6 @@
-﻿#if DEBUG
-using System.Windows;
-#else
+﻿using System.Windows;
+#if !DEBUG
 using System;
-using System.Diagnostics;
 using System.Windows.Threading;
 #endif
 

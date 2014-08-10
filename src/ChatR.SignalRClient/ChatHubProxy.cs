@@ -29,6 +29,7 @@ namespace ChatR.SignalRClient
         
         public async Task<bool> Connect()
         {
+            
             if (IsConnected)
                 return true;
 

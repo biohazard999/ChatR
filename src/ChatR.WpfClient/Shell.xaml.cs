@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using DevExpress.Xpf.Core;
 
 namespace ChatR.WpfClient
 {
@@ -6,7 +7,7 @@ namespace ChatR.WpfClient
     /// Interaction logic for Shell.xaml
     /// </summary>
     [Export]
-    public partial class Shell
+    public partial class Shell : DXWindow
     {
         [ImportingConstructor]
         public Shell(ShellViewModel viewModel)

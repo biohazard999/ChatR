@@ -4,15 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ChatR.WpfClient.ViewModels"
+             xmlns:splashScreens="clr-namespace:Para.Office.WPFApplication.Helpers.SplashScreens"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
         <viewModels:LoginViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    </UserControl.Resources>
     <StackPanel>
         <Label Content="Username:"></Label>
         <TextBox Text="{Binding Username}">
         </TextBox>
         <Button Content="Login" Command="{Binding Login}"></Button>
+
+        <Label Content="{Binding ErrorMessage}" Visibility="{Binding IsErrorVisible, Converter={StaticResource booleanToVisibilityConverter}, FallbackValue=Hidden}"></Label>
+        <Button Content="Reconnect" Command="{Binding Reconnect}" Visibility="{Binding IsErrorVisible, Converter={StaticResource booleanToVisibilityConverter}, FallbackValue=Hidden}"></Button>
+        <splashScreens:Spinner Visibility="{Binding IsSpinnerVisible, Converter={StaticResource booleanToVisibilityConverter}, FallbackValue=Visible}"></splashScreens:Spinner>
     </StackPanel>
 </UserControl>

@@ -8,13 +8,17 @@ let outdirWinClient = outdir + "/ChatR.WinClient"
 let outdirWpfClient = outdir + "/ChatR.WpfClient"
 let outdirWebClient = outdir + "/ChatR.WebClient"
 
+
 let serverProj =    !! "src/ChatR.Server*/ChatR.Server*.csproj"
 let winClientProj = !! "src/ChatR.WinClient*/ChatR.WinClient*.csproj"
 let wpfClientProj = !! "src/ChatR.WpfClient*/ChatR.WpfClient*.csproj"
 let webClientProj = !! "src/ChatR.WebClient*/ChatR.WebClient*.csproj"
 
+
+let testOutputFile = outdir + "/TestResults.xml"
+
 Target "Clear" (fun _ -> 
-    CleanDir outdir
+    CleanDirs [outdir]
 )
 
 Target "Build" (fun _ -> 
@@ -32,8 +36,14 @@ Target "Build" (fun _ ->
         |> Log "ChatR.WebClient-Output: "
 )
 
-"Clear"
-    ==> "Build"
+Target "Test" (fun _ ->
+    !! (outdir + @"\*.Tests.dll") 
+      |> NUnitParallel (fun p -> { p with OutputFile = testOutputFile })
+)
+
+//"Clear"
+//    ==> "Build"
+//    ==> "Test"
 
 
-RunTargetOrDefault "Build"
+RunTargetOrDefault "Test"

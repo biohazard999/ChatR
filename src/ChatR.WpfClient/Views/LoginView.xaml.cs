@@ -7,7 +7,7 @@ namespace ChatR.WpfClient.Views
     /// Interaction logic for LoginView.xaml
     /// </summary>
     [Export("LoginView")]
-    public partial class LoginView
+    public partial class LoginView 
     {
         public LoginView(LoginViewModel viewModel)
         {

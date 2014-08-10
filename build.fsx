@@ -32,9 +32,9 @@ Target "Build" (fun _ ->
         |> Log "ChatR.WebClient-Output: "
 )
 
-
 "Clear"
     ==> "Build"
+    ==> "Test"
 
 
-RunTargetOrDefault "Build"
+RunTargetOrDefault "Test"

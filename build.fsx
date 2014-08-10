@@ -34,7 +34,6 @@ Target "Build" (fun _ ->
 
 "Clear"
     ==> "Build"
-    ==> "Test"
 
 
-RunTargetOrDefault "Test"
+RunTargetOrDefault "Build"

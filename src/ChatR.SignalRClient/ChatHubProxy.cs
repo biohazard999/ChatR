@@ -6,11 +6,12 @@ using Microsoft.AspNet.SignalR.Client;
 
 namespace ChatR.SignalRClient
 {
-    public class ChatHubProxy : IChatHubProxy
+    public class ChatHubProxy : IChatHubProxy, IDisposable
     {
-        private readonly HubConnection _connection;
+        private HubConnection _connection;
         private readonly SynchronizationContext _context;
         private readonly IHubProxy _proxy;
+        
 
         public bool IsConnected { get; private set; }
 
@@ -25,8 +26,13 @@ namespace ChatR.SignalRClient
 
             _proxy.On<UserDetail, UserDetail[]>("OnConnected", OnConnected);
             Connected = (userdetail, userdetails) => { };
+
+            _proxy.On<UserDetail>("OnNewUserConnected", OnNewUserConnected);
+            NewUserConnected = (userdetail) => { };
         }
+
         
+
         public async Task<bool> Connect()
         {
             
@@ -55,6 +61,12 @@ namespace ChatR.SignalRClient
         }
 
         public Action<UserDetail, UserDetail[]> Connected { get; set; }
+        
+        private void OnNewUserConnected(UserDetail userDetail)
+        {
+            _context.Post(_ => NewUserConnected(userDetail), null);
+        }
+        public Action<UserDetail> NewUserConnected { get; set; }
 
         #endregion
 
@@ -71,5 +83,20 @@ namespace ChatR.SignalRClient
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && _connection != null)
+            {
+                _connection.Dispose();
+                _connection = null;
+            }
+        }
     }
 }

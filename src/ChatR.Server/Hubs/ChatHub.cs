@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using ChatR.Model;
 using Microsoft.AspNet.SignalR;
@@ -14,7 +15,7 @@ namespace ChatR.Server.Hubs
             Clients.Others.OnMessageReceived(user, message);
         }
 
-        public void Login(string userName)
+        public string Login(string userName)
         {
             var id = Context.ConnectionId;
 
@@ -27,8 +28,9 @@ namespace ChatR.Server.Hubs
 
                 Clients.Others.OnNewUserConnected(userDetail);
             }
+            return userName;
         }
 
-        readonly List<UserDetail> _connectedUsers = new List<UserDetail>();
+        readonly ConcurrentBag<UserDetail> _connectedUsers = new ConcurrentBag<UserDetail>();
     }
 }

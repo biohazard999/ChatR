@@ -87,6 +87,11 @@ namespace ChatR.SignalRClient
             return _proxy.Invoke<string>("Login", userName);
         }
 
+        public Task<GroupInfo> AddOrJoinGroup(string groupName)
+        {
+            return _proxy.Invoke<GroupInfo>("AddOrJoinGroup", groupName);
+        }
+
         #endregion
 
         public void Dispose()
@@ -103,6 +108,5 @@ namespace ChatR.SignalRClient
                 _connection = null;
             }
         }
-
     }
 }

@@ -40,6 +40,19 @@ namespace ChatR.Server.Hubs
             return userName;
         }
 
+        public GroupInfo AddOrJoinGroup(string groupName)
+        {
+            var id = Context.ConnectionId;
+
+            return new GroupInfo
+            {
+                GroupName = groupName,
+                Users = { _connectedUsers.First(u => u.ConnectionId == id) }
+            };
+        }
+
         static readonly ConcurrentBag<UserDetail> _connectedUsers = new ConcurrentBag<UserDetail>();
+
+        static readonly ConcurrentBag<GroupInfo> _Groups = new ConcurrentBag<GroupInfo>();
     }
 }

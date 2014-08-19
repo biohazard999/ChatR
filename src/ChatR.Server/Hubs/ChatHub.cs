@@ -31,6 +31,6 @@ namespace ChatR.Server.Hubs
             return userName;
         }
 
-        readonly ConcurrentBag<UserDetail> _connectedUsers = new ConcurrentBag<UserDetail>();
+        static readonly ConcurrentBag<UserDetail> _connectedUsers = new ConcurrentBag<UserDetail>();
     }
 }

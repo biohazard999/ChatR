@@ -21,7 +21,7 @@ namespace ChatR.SignalRClient
             _context = context;
             _proxy = _connection.CreateHubProxy("ChatHub");
 
-            _proxy.On<UserDetail, ChatMessage>("MessageReceived", OnMessageReceived);
+            _proxy.On<UserDetail, ChatMessage>("OnMessageReceived", OnMessageReceived);
             MessageReceived = (sender, message) => { };
 
             _proxy.On<UserDetail, UserDetail[]>("OnConnected", OnConnected);

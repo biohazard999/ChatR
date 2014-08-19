@@ -76,6 +76,11 @@ namespace ChatR.SignalRClient
         {
             return _proxy.Invoke<ChatMessage>("SendMessage", message);
         }
+        
+        public Task<object> SendMessage(string userName, ChatMessage chatMessage)
+        {
+            return _proxy.Invoke<object>("SendMessage", userName, chatMessage);
+        }
 
         public Task<string> Login(string userName)
         {
@@ -98,5 +103,6 @@ namespace ChatR.SignalRClient
                 _connection = null;
             }
         }
+
     }
 }
